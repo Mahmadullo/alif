@@ -18,35 +18,18 @@ class ContactController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Contact $contact)
     {
-        //
-    }
+        $contact->create([
+            'name' => $request->name
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Contact  $contact
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Contact $contact)
-    {
-        //
+        return response()->json(['msg' => 'Success']);
     }
 
     /**
@@ -69,7 +52,13 @@ class ContactController extends Controller
      */
     public function update(Request $request, Contact $contact)
     {
-        //
+        $contact = $contact->find($request->id);
+
+        $contact->update([
+            'name' => $request->name
+        ]);
+
+        return response()->json(['msg' => 'Success']);
     }
 
     /**

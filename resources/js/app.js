@@ -9,6 +9,7 @@ var Core = {
 
 $(document).on('click', '#create-contact', function () {
     $('#table-list-contacts').hide();
+    $(this).hide();
     $('#form-create-contact').show();
 });
 

@@ -33,9 +33,13 @@ class EmailController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Email $email)
     {
-        //
+        $email->create([
+            'name' => $request->name
+        ]);
+
+        return response()->json(['msg' => 'Success']);
     }
 
     /**
@@ -80,6 +84,8 @@ class EmailController extends Controller
      */
     public function destroy(Email $email)
     {
-        //
+        $email->delete();
+
+        return response()->json(['msg' => 'Success']);
     }
 }
