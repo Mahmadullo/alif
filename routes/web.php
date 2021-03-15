@@ -15,3 +15,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [ContactController::class, 'index']);
+Route::delete('/contact/delete/{contact}', [ContactController::class, 'destroy']);
