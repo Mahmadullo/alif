@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use App\Models\Phone;
 use Illuminate\Http\Request;
 
@@ -33,9 +34,15 @@ class PhoneController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Contact $contact)
     {
-        //
+        $contact = $contact->find($request->contact_id);
+
+        $contact->phones()->create([
+            'content' => $request->content
+        ]);
+
+        return response()->json([]);
     }
 
     /**
@@ -90,6 +97,6 @@ class PhoneController extends Controller
     {
         $phone->delete();
 
-        return response()->json(['msg' => 'Success']);        
+        return response()->json($phone->id);        
     }
 }
