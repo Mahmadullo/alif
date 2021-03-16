@@ -13,6 +13,20 @@ $(document).on('click', '#create-contact', function () {
     $('#form-create-contact').show();
 });
 
+$(document).on('click', '#push-create', function () {
+    let id = $(this).attr('id'),
+	content = $('#name-of-contact').val();
+
+    $.ajax({
+	url: '/contact/create',
+	type: 'POST',
+	headers: Core.headers,
+	data: { id, content }
+    }).done(data => {
+	// window.location.reload
+    }).error(err => console.log(err));
+});
+
 $(document).on('click', '.delete-contact', function () {
     let id = $(this).attr('id');
 

@@ -69,7 +69,15 @@ class PhoneController extends Controller
      */
     public function update(Request $request, Phone $phone)
     {
-        //
+        $phone = $phone->find($request->id);
+
+        $phone->update([
+            'content' => $request->content
+        ]);
+
+        return response()->json([
+          'msg' => 'Success'
+        ]);
     }
 
     /**
