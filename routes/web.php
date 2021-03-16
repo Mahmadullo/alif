@@ -15,4 +15,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [ContactController::class, 'index']);
+Route::post('/contact/create', [ContactController::class, 'store']);
+Route::post('/contact/update', [ContactController::class, 'update']);
 Route::delete('/contact/delete/{contact}', [ContactController::class, 'destroy']);
+
+
+// Phones
+Route::post('/phone/create', [PhoneController::class, 'store']);
+Route::post('/phone/update', [PhoneController::class, 'update']);
+Route::delete('/phone/delete/{phone}', [PhoneController::class, 'destroy']);
+
+// Emails
+Route::post('/email/create', [EmailController::class, 'store']);
+Route::post('/email/update', [EmailController::class, 'update']);
+Route::delete('/email/delete/{email}', [EmailController::class, 'destroy']);
