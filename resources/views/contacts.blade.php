@@ -3,7 +3,9 @@
     Contacts
 @endsection
 @section('content')
-<button class="btn btn-primary" id="create-contact">Create</button>
+<button class="btn btn-primary" id="create-contact">Create contact</button>
+<button class="btn btn-primary" id="create-phone">Create phone</button>
+<button class="btn btn-primary" id="create-email">Create Email</button>
 <div id="form-create-contact" style="display: none;">
     <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -15,13 +17,58 @@
         <button class="btn btn-success" id="push-create">Create</button>
     </div>
 </div>
+<div id="form-create-phone" style="display: none;">
+    <label for="contact">Select contact</label>
+        <select class="form-control" id="select">
+        @foreach ($contacts as $contact)
+            <option value="{{ $contact->id }}">{{ $contact->name }}</option>
+        @endforeach
+        </select>
+    <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Phone</span>
+            </div>    
+            <input type="text" class="form-control" id="phone-of-contact" placeholder="Phone">
+        </div>    
+        <div class="input-group mb-3">
+        <button class="btn btn-success" id="push-create-phone">Create</button>
+    </div>
+    </div>
+    
+<div id="form-create-email" style="display: none;">
+    <label for="contact">Select contact</label>
+        <select class="form-control">
+        @foreach ($contacts as $contact)
+            <option value="{{ $contact->id }}">{{ $contact->name }}</option>
+        @endforeach
+        </select>
+    <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Email</span>
+            </div>    
+            <input type="text" class="form-control" id="email-of-contact" placeholder="Email">
+        </div>  
+        <div class="input-group mb-3">
+            <button class="btn btn-success" id="push-create-email">Create</button>
+        </div>  
+</div>
+<div id="form-edit-contact" style="display: none;">
+    <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Name</span>
+            </div>    
+            <input type="text" class="form-control" id="name-of-contact" placeholder="Name" value="{{ $contact->name }}">        
+    </div>  
+        <div class="input-group mb-3">
+            <button class="btn btn-success" id="push-create-email">Update</button>
+        </div>  
+       
+</div>
 <table class="table" id="table-list-contacts">
   <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Name</th>
-      <th scope="col">Phone numbers</th>
-      <th scope="col">Emails</th>
     </tr>
   </thead>
   <tbody>
@@ -49,18 +96,18 @@
                 @if (sizeof($contact->phones) > 0):
                     <h3>Phone Numbers: </h3>
                     @foreach ($contact->phones as $phone)
-                        {{ $phone->content }}
+                        {{ $phone->content }} <br>
                     @endforeach                    
                 @else 
-                    __('No Phone numbers for this contact')
+                    {{__('No Phone numbers for this contact')}} <br>
                 @endif
                 @if (sizeof($contact->emails) > 0):
                     <h3>Email addresses: </h3>
                     @foreach ($contact->emails as $email)
-                        {{ $email->content }}
+                        {{ $email->content }} <br>
                     @endforeach                    
                 @else 
-                    __('No Email Addresses for this contact')
+                   {{ __('No Email Addresses for this contact')}} <br>
                 @endif
             </div>
             <div class="modal-footer">
@@ -70,6 +117,7 @@
         </div>
         </div>
       </td>
+      <td><a href="{{ route('edit.contact', $contact->id) }}" class="btn btn-primary edit-contact" id="edit-{{ $contact->id }}">Edit</a></td>
       <td>
         <button class="btn btn-danger delete-contact" id="{{ $contact->id }}">Delete</button>
       </td>

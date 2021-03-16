@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\EmailController;
+use App\Http\Controllers\PhoneController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,9 +18,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ContactController::class, 'index']);
 Route::post('/contact/create', [ContactController::class, 'store']);
+Route::get('/contact/edit/{contact}', [ContactController::class, 'edit'])->name('edit.contact');
 Route::post('/contact/update', [ContactController::class, 'update']);
 Route::delete('/contact/delete/{contact}', [ContactController::class, 'destroy']);
-
 
 // Phones
 Route::post('/phone/create', [PhoneController::class, 'store']);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use App\Models\Email;
 use Illuminate\Http\Request;
 
@@ -33,10 +34,11 @@ class EmailController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Email $email)
+    public function store(Request $request, Contact $contact)
     {
-        $email->create([
-            'name' => $request->name
+        $contact = $contact->find($request->contact_id);    
+        $contact->emails()->create([
+            'content' => $request->content
         ]);
 
         return response()->json(['msg' => 'Success']);
