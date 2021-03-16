@@ -37,7 +37,7 @@ Edit {{ $contact->name }}
         @endforeach        
     @endif         
     <div class="input-group mb-3">
-        <button class="btn btn-success" id="push-update">Update</button>
+        <button class="btn btn-success" id="push-update" data-id="{{ $contact->id }}">Update</button>
     </div>
 </div>
 @endsection
