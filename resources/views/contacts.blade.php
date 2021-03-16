@@ -9,7 +9,7 @@
         <div class="input-group-prepend">
             <span class="input-group-text">Name:</span>
         </div>
-        <input type="text" class="form-control" placeholder="Name" aria-label="Name">
+        <input type="text" id="name-of-contact" class="form-control" placeholder="Name" aria-label="Name">
     </div>    
     <div class="input-group mb-3">
         <button class="btn btn-success" id="push-create">Create</button>
