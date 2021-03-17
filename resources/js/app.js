@@ -84,6 +84,42 @@ $(document).on('click', '#push-create-email', function () {
 });
 
 
+$(document).on('click', '.update-email', function () {
+    let id = $(this).data('id'),
+	content = $('#email-address-of-contact-' + id).val();
+
+    $.ajax({
+	url: '/email/update',
+	type: 'POST',
+	headers: Core.headers,
+	data: { id, content }
+    }).done(data => {
+	$('.card-body').prepend('<div class="alert alert-success">Successfully created!</div>');
+	setTimeout(() => {
+	    $('.alert.alert-success').remove();
+	}, 1500);
+
+    })
+});
+
+$(document).on('click', '.update-phone', function () {
+    let id = $(this).data('id'),
+	content = $('#phone-number-of-contact-' + id).val();
+
+    console.log(content);
+    $.ajax({
+	url: '/phone/update',
+	type: 'POST',
+	headers: Core.headers,
+	data: { id, content }
+    }).done(data => {
+	$('.card-body').prepend('<div class="alert alert-success">Successfully created!</div>');
+	setTimeout(() => {
+	    $('.alert.alert-success').remove();
+	}, 1500);
+
+    })
+});
 $(document).on('click', '.delete-email', function () {
     let id = $(this).data('id');
 
@@ -93,6 +129,9 @@ $(document).on('click', '.delete-email', function () {
         headers: Core.headers,
     }).done(data => {
         $('#email-address-' + data).remove();
+	if ($('.email-address').length == 0) {
+	    $('#h3-email').remove();
+	}
     }).error(err => console.log(err));
 });
 
@@ -105,6 +144,9 @@ $(document).on('click', '.delete-phone', function () {
         headers: Core.headers,
     }).done(data => {
         $('#phone-number-' + data).remove();
+	if ($('.phone-number').length == 0) {
+	    $('#h3-phone').remove();
+	}
     }).error(err => console.log(err));
 });
 
