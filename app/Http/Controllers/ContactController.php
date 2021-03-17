@@ -43,6 +43,17 @@ class ContactController extends Controller
         return view('edit')->with('contact', $contact);
     }
 
+    public function search(Request $request, Contact $contact)
+    {
+        $word = $request->word;
+
+        $contacts = $contact->where('name', 'like', '%' . $word . '%')->get();
+
+        return view('search')
+            ->with('contacts', $contacts)
+            ->with('word', $word);
+    }
+
     /**
      * Update the specified resource in storage.
      *

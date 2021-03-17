@@ -31,3 +31,6 @@ Route::delete('/phone/delete/{phone}', [PhoneController::class, 'destroy']);
 Route::post('/email/create', [EmailController::class, 'store']);
 Route::post('/email/update', [EmailController::class, 'update']);
 Route::delete('/email/delete/{email}', [EmailController::class, 'destroy']);
+
+// Search
+Route::get('/search/word', [ContactController::class, 'search'])->name('search');
