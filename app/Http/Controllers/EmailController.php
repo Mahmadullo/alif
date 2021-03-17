@@ -75,7 +75,13 @@ class EmailController extends Controller
      */
     public function update(Request $request, Email $email)
     {
-        //
+        $email = $email->find($request->id);
+
+        $email->update([
+            'content' => $request->content
+        ]);
+
+        return response()->json([], 200);
     }
 
     /**
@@ -88,6 +94,6 @@ class EmailController extends Controller
     {
         $email->delete();
 
-        return response()->json(['msg' => 'Success']);
+        return response()->json($email->id);
     }
 }
